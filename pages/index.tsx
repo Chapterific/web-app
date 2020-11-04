@@ -1,19 +1,24 @@
 import Head from "next/head";
 import { Paper } from "@material-ui/core";
-import { BookList } from "../components/books";
+import { BookList, BookSearch } from "../components/books";
 
 export async function getStaticProps() {
-  const req = `https://www.googleapis.com/books/v1/volumes?q=blink+malcolm`;
+  const query = "green lights";
+  const req = `https://www.googleapis.com/books/v1/volumes?q=${query.replace(
+    " ",
+    "+"
+  )}`;
   const res = await fetch(req);
   const items = await res.json();
   return {
     props: {
       items,
+      query,
     },
   };
 }
 
-export default function Home({ items }) {
+export default function Home({ items, query }) {
   return (
     <div>
       <Head>
@@ -22,7 +27,7 @@ export default function Home({ items }) {
       </Head>
 
       <main>
-        <Paper>sup</Paper>
+        <BookSearch query={query}></BookSearch>
         <BookList data={items}></BookList>
       </main>
 

@@ -20,7 +20,7 @@ export const BookList = ({ data }: any) => {
             <Card style={{ display: "flex", height: 150, overflow: "auto" }}>
               <CardMedia
                 style={{ height: 150, minWidth: 100 }}
-                image={book.volumeInfo.imageLinks?.thumbnail}
+                image={book.volumeInfo.imageLinks?.thumbnail || "sorry"}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
