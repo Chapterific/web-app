@@ -6,18 +6,25 @@ const BookListItem = styled.li`
   ${({ theme }) => `
         list-style-type: none;
         padding: ${theme.spacing(1)}px;
+        .book-card {
+            display: flex;
+            height: 150px;
+            overflow: auto;
+            :hover {
+                background-color: ${theme.palette.grey[700]}
+            };
+        }
     `}
 `;
 
 export const BookList = ({ data }: any) => {
-  console.log(data);
   const { items } = data;
   return (
     <ul style={{ padding: 0 }}>
       {items.map((book) => {
         return (
           <BookListItem key={book.id}>
-            <Card style={{ display: "flex", height: 150, overflow: "auto" }}>
+            <Card className="book-card">
               <CardMedia
                 style={{ height: 150, minWidth: 100 }}
                 image={book.volumeInfo.imageLinks?.thumbnail || "sorry"}

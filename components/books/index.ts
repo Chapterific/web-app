@@ -1,3 +1,4 @@
 import { BookList } from "./BookList";
 import { BookSearch } from "./BookSearch";
-export { BookList, BookSearch };
+import { useBooks } from "./useBooks";
+export { BookList, BookSearch, useBooks };

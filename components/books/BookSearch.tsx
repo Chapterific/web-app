@@ -9,12 +9,17 @@ const SearchContainer = styled(Paper)`
         padding: ${theme.spacing(2)}px;
         display: flex;
         flex-wrap: nowrap;
+        .search-field {
+            width: 500px;
+        }
     `}
 `;
 
-export const BookSearch = ({ query }) => {
+export const BookSearch = ({ query, updateQuery }) => {
   const { handleSubmit, control } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async ({ search }) => {
+    await updateQuery(search);
+  };
   return (
     <SearchContainer>
       <form onSubmit={handleSubmit(onSubmit)}>

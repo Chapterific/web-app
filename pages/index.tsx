@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Paper } from "@material-ui/core";
-import { BookList, BookSearch } from "../components/books";
+import { BookList, BookSearch, useBooks } from "../components/books";
 
 export async function getStaticProps() {
   const query = "green lights";
@@ -19,6 +19,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ items, query }) {
+  const { books, updateQuery, search } = useBooks(items, query);
   return (
     <div>
       <Head>
@@ -27,8 +28,8 @@ export default function Home({ items, query }) {
       </Head>
 
       <main>
-        <BookSearch query={query}></BookSearch>
-        <BookList data={items}></BookList>
+        <BookSearch query={search} updateQuery={updateQuery}></BookSearch>
+        <BookList data={books}></BookList>
       </main>
 
       <footer></footer>
