@@ -1,11 +1,18 @@
 import { LoginButton, LogoutButton, Profile } from "../components/Login";
 import React from "react";
-import { useWishList, useDeleteWishList } from "../hooks/useApi";
+import {
+  useWishList,
+  useDeleteWishList,
+  useCreateWishList,
+} from "../hooks/useApi";
+import { useForm } from "react-hook-form";
 
 export default function Home() {
   const { data } = useWishList();
   const [deleteFn] = useDeleteWishList();
-
+  const { register, handleSubmit } = useForm();
+  const [updateWishList] = useCreateWishList();
+  const onSubmit = (data) => updateWishList(data);
   return (
     <div>
       <LoginButton></LoginButton>
@@ -16,11 +23,17 @@ export default function Home() {
           return (
             <li key={i.id}>
               <button onClick={() => deleteFn(i.id)}>delete</button>
-              {i.description}
+              {i.name}-{i.description}
             </li>
           );
         })}
       </ul>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input name="name" ref={register} />
+        <input name="description" ref={register} />
+        <input name="url" ref={register} />
+        <button type="submit">submit</button>
+      </form>
       sup
     </div>
   );
