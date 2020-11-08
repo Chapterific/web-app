@@ -1,6 +1,7 @@
 import { useBooks } from "../../hooks/useBooks";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import styled from "styled-components";
+import { BookCard } from "./BookCard";
 
 const BooksList = styled.ul`
   ${({ theme }) => `
@@ -14,20 +15,14 @@ const BooksList = styled.ul`
 
 export const BookList = (bookQuery) => {
   const { data } = useBooks(bookQuery);
-  if (!data) return <div>sorry</div>;
+  if (!data) return <div>No Books</div>;
 
   return (
     <BooksList>
       {data?.items.map((book) => {
         return (
           <li key={book.id}>
-            <Card>
-              <CardContent>
-                <Typography color="textPrimary">
-                  {book.volumeInfo.title}
-                </Typography>
-              </CardContent>
-            </Card>
+            <BookCard book={book}></BookCard>
           </li>
         );
       })}

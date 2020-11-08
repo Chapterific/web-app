@@ -13,13 +13,6 @@ const NoSSRComponent = dynamic(() => import("../components/Root"), {
   ssr: false,
 });
 
-const AppBackground = styled.div`
-  ${({ theme }) => `
-    background-color: ${theme.palette.background.default};
-    height: 100vh;
-  `}
-`;
-
 type PaletteType = "light" | "dark";
 
 function MyApp({ Component, pageProps }) {
@@ -40,9 +33,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <StyleProvider theme={theme}>
-        <AppBackground>
-          <NoSSRComponent Component={Component} pageProps={pageProps} />
-        </AppBackground>
+        <NoSSRComponent Component={Component} pageProps={pageProps} />
       </StyleProvider>
     </ThemeProvider>
   );
