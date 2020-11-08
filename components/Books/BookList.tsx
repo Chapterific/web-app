@@ -14,8 +14,9 @@ const BooksList = styled.ul`
 `;
 
 export const BookList = (bookQuery) => {
-  const { data } = useBooks(bookQuery);
-  if (!data) return <div>No Books</div>;
+  const { data, isLoading, isError } = useBooks(bookQuery);
+  if (isLoading) return <div>loading</div>;
+  if (isError) return <div>No Books</div>;
 
   return (
     <BooksList>

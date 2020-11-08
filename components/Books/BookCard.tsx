@@ -1,7 +1,14 @@
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+} from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { Book } from "./book";
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledCard = styled(Card)`
   ${({ theme }) => `
@@ -15,17 +22,26 @@ const StyledCard = styled(Card)`
             display: flex;
             flex-direction: column;
             width: 100%;
-            overflow-y: auto;
         }
     `}
 `;
+
+const CardControls = styled.div`
+  ${({ theme }) => `
+        padding-top: ${theme.spacing(1)}px;
+    `}
+`;
+
+const handleSeeMore = (book) => {
+  console.log(book);
+};
 
 export const BookCard = ({ book }: { book: Book }) => {
   return (
     <StyledCard>
       <CardMedia
         className="book-media"
-        image={book.volumeInfo?.imageLinks?.thumbnail}
+        image={book.volumeInfo?.imageLinks?.thumbnail || "/"}
       />
       <CardContent className="book-card-content">
         <Typography color="textPrimary">{book.volumeInfo.title}</Typography>
@@ -37,6 +53,14 @@ export const BookCard = ({ book }: { book: Book }) => {
           value={book.volumeInfo.averageRating}
           readOnly
         />
+        <CardControls>
+          <Button color="primary" variant="contained">
+            Add to Read List
+          </Button>
+          <Button>
+            <Link href={`/books/${book.id}`}>See More</Link>
+          </Button>
+        </CardControls>
       </CardContent>
     </StyledCard>
   );
