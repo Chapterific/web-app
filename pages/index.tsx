@@ -1,20 +1,34 @@
-import { Button, Typography } from "@material-ui/core";
-import { Container } from "@material-ui/core";
+import { Typography, Container } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
+import { BookList } from "../components/Books";
+import { useForm } from "react-hook-form";
+import { TextField } from "../components/Form";
+import { useDebounce } from "../hooks/useDebounce";
 
 const MainContainer = styled(Container)`
   ${({ theme }) => `
     padding: ${theme.spacing(8)}px;
-`}
+  `}
 `;
 
 export default function Home() {
-  const { isAuthenticated } = useAuth0();
+  const [bookQuery, setBookQuery] = React.useState("neuromancer");
+  const { control } = useForm();
+  const debouncedBookQuery = useDebounce(bookQuery, 500);
+  console.log(debouncedBookQuery);
   return (
     <MainContainer maxWidth="md">
-      <Typography color="textPrimary">Sup</Typography>
+      <Typography color="textPrimary">Find Books</Typography>
+
+      <TextField
+        onChange={setBookQuery}
+        name="query"
+        control={control}
+        defaultValue={debouncedBookQuery || bookQuery}
+      />
+
+      <BookList bookQuery={bookQuery}></BookList>
     </MainContainer>
   );
 }
