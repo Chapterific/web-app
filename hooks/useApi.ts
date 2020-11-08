@@ -45,7 +45,7 @@ export const useDeleteWishList = () => {
       }).then((res: any) => res.json());
     },
     {
-      onSuccess: () => queryCache.refetchQueries("wishlists"),
+      onSuccess: () => queryCache.refetchQueries("posts"),
     }
   );
 };
@@ -67,7 +67,7 @@ export const useCreateWishList = () => {
       }).then((res) => res.json());
     },
     {
-      onSuccess: () => queryCache.refetchQueries("wishlists"),
+      onSuccess: () => queryCache.refetchQueries("posts"),
     }
   );
 };
