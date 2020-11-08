@@ -40,6 +40,9 @@ const Book = () => {
             data.volumeInfo.description ?? "This book has not been described :("
           )}
         </Typography>
+        <Typography variant="body1">
+          Page Count: {data.volumeInfo.pageCount}
+        </Typography>
         <Button color="primary" variant="contained">
           Add To Read List
         </Button>
