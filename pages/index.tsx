@@ -15,8 +15,7 @@ const MainContainer = styled(Container)`
 export default function Home() {
   const [bookQuery, setBookQuery] = React.useState("neuromancer");
   const { control } = useForm();
-  const debouncedBookQuery = useDebounce(bookQuery, 500);
-  console.log(debouncedBookQuery);
+  const debouncedBookQuery = useDebounce(bookQuery, 200);
   return (
     <MainContainer maxWidth="md">
       <Typography color="textPrimary">Find Books</Typography>
