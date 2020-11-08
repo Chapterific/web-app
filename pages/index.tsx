@@ -4,7 +4,10 @@ export default function Home() {
   return (
     <div>
       stuff
-      <Button>hey</Button>s
+      <Button variant="contained" color="primary">
+        hey
+      </Button>
+      s
     </div>
   );
 }
