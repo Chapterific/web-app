@@ -26,7 +26,7 @@ export function useBooks({ bookQuery }) {
       ),
     {
       onSuccess: ({ items }) => {
-        items.forEach((item) =>
+        items?.forEach((item) =>
           queryCache.setQueryData(["book", item.id], item)
         );
         return;

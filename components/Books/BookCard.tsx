@@ -57,9 +57,9 @@ export const BookCard = ({ book }: { book: Book }) => {
           <Button color="primary" variant="contained">
             Add to Read List
           </Button>
-          <Button>
-            <Link href={`/books/${book.id}`}>See More</Link>
-          </Button>
+          <Link href={`/books/${book.id}`}>
+            <Button>See More</Button>
+          </Link>
         </CardControls>
       </CardContent>
     </StyledCard>

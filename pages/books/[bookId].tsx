@@ -22,11 +22,11 @@ const Book = () => {
   if (isError) return <div>oops</div>;
   return (
     <>
-      <IconButton>
-        <Link href="/">
+      <Link href="/">
+        <IconButton>
           <ArrowBackIcon />
-        </Link>
-      </IconButton>
+        </IconButton>
+      </Link>
       <BookPaper>
         <Typography variant="h2" component="h1">
           {data.volumeInfo.title}
