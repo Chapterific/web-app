@@ -24,6 +24,7 @@ export function useBooks({ bookQuery }) {
         res.json()
       ),
     {
+      staleTime: 60000,
       onSuccess: ({ items }) => {
         items?.forEach((item) =>
           queryCache.setQueryData(["book", item.id], item)
