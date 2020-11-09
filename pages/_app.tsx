@@ -1,12 +1,7 @@
 import "../styles/globals.css";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  Button,
-  colors,
-} from "@material-ui/core";
+import { createMuiTheme, ThemeProvider, colors } from "@material-ui/core";
 import dynamic from "next/dynamic";
-import styled, { ThemeProvider as StyleProvider } from "styled-components";
+import { ThemeProvider as StyleProvider } from "styled-components";
 import React from "react";
 
 const NoSSRComponent = dynamic(() => import("../components/Root"), {
@@ -16,7 +11,10 @@ const NoSSRComponent = dynamic(() => import("../components/Root"), {
 type PaletteType = "light" | "dark";
 
 function MyApp({ Component, pageProps }) {
-  const [paletteType, setPaletteType] = React.useState<PaletteType>("dark");
+  const [paletteType] = React.useState<PaletteType>("dark");
+
+  // (Sean Rivard-Morton) [2020-11-09] TODO:
+  // Add functionality to toggle themes. preferrably from settings or a navbar
   const theme = createMuiTheme({
     palette: {
       type: paletteType,

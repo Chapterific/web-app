@@ -32,10 +32,6 @@ const CardControls = styled.div`
     `}
 `;
 
-const handleSeeMore = (book) => {
-  console.log(book);
-};
-
 export const BookCard = ({ book }: { book: Book }) => {
   return (
     <StyledCard>

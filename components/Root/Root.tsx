@@ -1,5 +1,5 @@
 import React from "react";
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { Container } from "@material-ui/core";
 import { Layout } from "../Layout";
 import { Login } from "../Login";
@@ -8,12 +8,6 @@ import { ReactQueryDevtools } from "react-query-devtools";
 import { AppStateProvider } from "../../hooks/useAppContext";
 
 const queryCache = new QueryCache();
-
-const appState = {
-  bookQuery: "neuromancer",
-};
-
-const AppContext = React.createContext(appState);
 
 export const Root = ({ Component, pageProps }) => {
   return (
