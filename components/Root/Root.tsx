@@ -4,28 +4,34 @@ import { Container } from "@material-ui/core";
 import { Layout } from "../Layout";
 import { Login } from "../Login";
 import { ReactQueryCacheProvider, QueryCache } from "react-query";
+import { ReactQueryDevtools } from "react-query-devtools";
 
 const queryCache = new QueryCache();
 
 export const Root = ({ Component, pageProps }) => {
   return (
-    <Auth0Provider
-      domain="chapterific.eu.auth0.com"
-      clientId="Iitf46uMtWldl9Orcg03ibtmeEkXlXWB"
-      redirectUri={window.location.origin}
-      audience="https://auth0-jwt-authorizer"
-      scope="read:current_user update:current_user_metadata"
-      useRefreshTokens={true}
-    >
-      <ReactQueryCacheProvider queryCache={queryCache}>
-        <Container maxWidth="md">
-          <Layout pageTitle="Chapterific" subTitle="It's terrific.">
-            <Login>
-              <Component {...pageProps} />
-            </Login>
-          </Layout>
-        </Container>
-      </ReactQueryCacheProvider>
-    </Auth0Provider>
+    <>
+      <Auth0Provider
+        domain="chapterific.eu.auth0.com"
+        clientId="Iitf46uMtWldl9Orcg03ibtmeEkXlXWB"
+        redirectUri={window.location.origin}
+        audience="https://auth0-jwt-authorizer"
+        scope="read:current_user update:current_user_metadata"
+        useRefreshTokens={true}
+      >
+        <ReactQueryCacheProvider queryCache={queryCache}>
+          <Container maxWidth="md">
+            <Layout pageTitle="Chapterific" subTitle="It's terrific.">
+              <Login>
+                <Component {...pageProps} />
+              </Login>
+            </Layout>
+          </Container>
+          {process.env.NODE_ENV ? (
+            <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
+          ) : null}
+        </ReactQueryCacheProvider>
+      </Auth0Provider>
+    </>
   );
 };

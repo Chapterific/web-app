@@ -20,7 +20,7 @@ export const BookList = (bookQuery) => {
 
   return (
     <BooksList>
-      {data?.items.map((book) => {
+      {data?.items?.map((book) => {
         return (
           <li key={book.id}>
             <BookCard book={book}></BookCard>
