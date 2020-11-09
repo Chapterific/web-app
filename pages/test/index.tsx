@@ -21,10 +21,6 @@ const Page = () => {
   const { data, isLoading, isError } = useWishList();
   const { control, handleSubmit } = useForm();
   const [updateWishList] = useCreateWishList();
-  //   const thing = useWishList2();
-
-  //   console.log("thing", thing);
-  console.log(data);
 
   if (isLoading) return <div>loading</div>;
   if (isError || !data) return <div>There was an error..</div>;
