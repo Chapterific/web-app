@@ -1,10 +1,6 @@
 import { Paper, Button, TextField } from "@material-ui/core";
 import styled from "styled-components";
-import {
-  useWishList,
-  useWishList2,
-  useCreateWishList,
-} from "../../hooks/useApi";
+import { useWishList, useCreateWishList } from "../../hooks/useApi";
 import { Controller, useForm } from "react-hook-form";
 
 const TestPaper = styled(Paper)`
