@@ -5,7 +5,6 @@ import { Book } from "../components/Books/book";
 const booksUrl = "https://www.googleapis.com/books/v1/volumes";
 
 export function useBook(bookId) {
-  console.log();
   return useQuery<Book, Error>(
     ["book", bookId],
     () => fetch(`${booksUrl}/${bookId}`).then((res) => res.json()),

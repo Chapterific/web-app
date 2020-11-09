@@ -5,6 +5,7 @@ import { BookList } from "../components/Books";
 import { useForm } from "react-hook-form";
 import { TextField } from "../components/Form";
 import { useDebounce } from "../hooks/useDebounce";
+import { useAppState } from "../hooks/useAppContext";
 
 const MainContainer = styled(Container)`
   ${({ theme }) => `
@@ -13,9 +14,9 @@ const MainContainer = styled(Container)`
 `;
 
 export default function Home() {
-  const [bookQuery, setBookQuery] = React.useState("neuromancer");
+  const [{ bookQuery }, setBookQuery] = useAppState();
   const { control } = useForm();
-  const debouncedBookQuery = useDebounce(bookQuery, 200);
+  const debouncedBookQuery = useDebounce(bookQuery, 2000);
   return (
     <MainContainer maxWidth="md">
       <Typography color="textPrimary">Find Books</Typography>

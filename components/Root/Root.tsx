@@ -5,8 +5,15 @@ import { Layout } from "../Layout";
 import { Login } from "../Login";
 import { ReactQueryCacheProvider, QueryCache } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
+import { AppStateProvider } from "../../hooks/useAppContext";
 
 const queryCache = new QueryCache();
+
+const appState = {
+  bookQuery: "neuromancer",
+};
+
+const AppContext = React.createContext(appState);
 
 export const Root = ({ Component, pageProps }) => {
   return (
@@ -20,13 +27,15 @@ export const Root = ({ Component, pageProps }) => {
         useRefreshTokens={true}
       >
         <ReactQueryCacheProvider queryCache={queryCache}>
-          <Container maxWidth="md">
-            <Layout pageTitle="Chapterific" subTitle="It's terrific.">
-              <Login>
-                <Component {...pageProps} />
-              </Login>
-            </Layout>
-          </Container>
+          <AppStateProvider>
+            <Container maxWidth="md">
+              <Layout pageTitle="Chapterific" subTitle="It's terrific.">
+                <Login>
+                  <Component {...pageProps} />
+                </Login>
+              </Layout>
+            </Container>
+          </AppStateProvider>
           {process.env.NODE_ENV ? (
             <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
           ) : null}
