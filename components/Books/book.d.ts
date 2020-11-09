@@ -1,3 +1,8 @@
+// (Sean Rivard-Morton) [2020-10-09] TODO
+// I think book data returned from the list of books
+// and an individual book is slightly different.
+// fix this, and put these types into types/book
+
 export interface Book {
   kind: string;
   id: string;

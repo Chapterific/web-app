@@ -36,6 +36,10 @@ const Book = () => {
         </Typography>
         <Rating value={data.volumeInfo?.averageRating || 0} readOnly />
         <Typography variant="body1">
+          {
+            // (Sean Rivard-Morton) [2020-10-09] TODO
+            // fix console warnings from improperly nested html from parse
+          }
           {parse(
             data.volumeInfo.description ?? "This book has not been described :("
           )}
