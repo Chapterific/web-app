@@ -18,6 +18,8 @@ const Book = () => {
   const router = useRouter();
   const { bookId } = router.query;
   const { data, isLoading, isError } = useBook(bookId);
+  // (Sean Rivard-Morton) [2020-10-09] TODO:
+  // Make loading and error state more sexy
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>oops</div>;
   return (
