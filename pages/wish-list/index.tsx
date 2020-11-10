@@ -54,7 +54,7 @@ const Page = () => {
   return (
     <>
       <WishList>
-        {data?.Items.map(({ id, ...item }) => (
+        {data?.Items?.map(({ id, ...item }) => (
           <li key={id}>
             <WishListCard raised={true}>
               <p>{item.name}</p>

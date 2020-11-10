@@ -39,9 +39,9 @@ export function useBooks({ bookQuery }) {
         // (Sean Rivard-Morton) [2020-10-09] Note:
         // If a list of books has been fetched, cache them so we don't have to
         // do an individual fetch later. It's pretty cool.
-        items?.forEach((item) =>
-          queryCache.setQueryData(["book", item.id], item)
-        );
+        items?.forEach((item) => {
+          queryCache.setQueryData(["book", item.id], item);
+        });
         return;
       },
     }
