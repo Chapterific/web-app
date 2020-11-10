@@ -13,7 +13,7 @@ const MainContainer = styled(Container)`
   `}
 `;
 
-export default function Home() {
+export default function Books() {
   const [{ bookQuery }, setBookQuery] = useAppState();
   const { control } = useForm();
   const debouncedBookQuery = useDebounce(bookQuery, 2000);

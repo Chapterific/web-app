@@ -22,7 +22,7 @@ export const Root = ({ Component, pageProps }) => {
       >
         <ReactQueryCacheProvider queryCache={queryCache}>
           <AppStateProvider>
-            <Container maxWidth="md">
+            <Container>
               <Layout pageTitle="Chapterific" subTitle="It's terrific.">
                 <Login>
                   <Component {...pageProps} />
