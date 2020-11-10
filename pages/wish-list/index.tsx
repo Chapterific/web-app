@@ -23,6 +23,7 @@ const WishList = styled.ul`
   flex-wrap: wrap;
   padding: 0px;
   /* width: 400px; */
+  list-style-type:none;
 `;
 
 const WishListCard = styled(Card)`
@@ -50,7 +51,7 @@ const Page = () => {
   if (isLoading) return <div>loading</div>;
   if (isError || !data) return <div>There was an error..</div>;
 
-  const onSubmit = ({ newData }) => updateWishList(newData);
+  const onSubmit = ({ newData }) => updateWishList({ method: 'POST', item: newData });
   return (
     <>
       <WishList>
@@ -74,6 +75,14 @@ const Page = () => {
               })}
               <Button
                 style={{ marginTop: 24 }}
+                onClick={() => updateWishList({ method: 'PATCH', item: { id, ...item }})}
+                variant="contained"
+                color="primary"
+              >
+                Update
+              </Button>
+              <Button
+                style={{ marginTop: 8 }}
                 onClick={() => deleteItem(id)}
                 variant="contained"
                 color="primary"
