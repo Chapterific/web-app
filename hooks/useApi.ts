@@ -1,16 +1,22 @@
 import { useQuery, useMutation, queryCache, useQueryCache } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 
-interface wishListPost {
-  id?: string
-  url: string
-  description: string
-  name: string
+interface WishListPost {
+  id?: string;
+  url: string;
+  description: string;
+  name: string;
 }
 
-interface updateWishList {
-  item: wishListPost,
-  method: 'POST' | 'PATCH'
+interface UpdateWishList {
+  item: WishListPost;
+  method: "POST" | "PATCH";
+}
+
+interface WishList {
+  Count: number;
+  Items: WishListPost[];
+  ScannedCount: number;
 }
 
 const wishUrl =
@@ -26,10 +32,10 @@ export const useWishList = () => {
 
   const config = {
     refetchOnWindowFocus: false,
-  }
+  };
 
-  return useQuery({
-    queryKey: 'wishes',
+  return useQuery<WishList>({
+    queryKey: "wishes",
     queryFn: async () => {
       const accessToken = getAccessTokenSilently(tokenConfig);
       return fetch(wishUrl, {
@@ -38,15 +44,15 @@ export const useWishList = () => {
         },
       }).then((res) => res.json());
     },
-    config
-  })
+    config,
+  });
 };
 
 export const useDeleteWishList = () => {
   const cache = useQueryCache();
   const { getAccessTokenSilently } = useAuth0();
   return useMutation(
-    async (id) => {
+    async (id: string) => {
       const accessToken = await getAccessTokenSilently(tokenConfig);
       return fetch(wishUrl, {
         method: "DELETE",
@@ -66,7 +72,7 @@ export const useCreateWishList = () => {
   const cache = useQueryCache();
   const { getAccessTokenSilently } = useAuth0();
   return useMutation(
-    async ({ item, method }: updateWishList) => {
+    async ({ item, method }: UpdateWishList) => {
       const accessToken = await getAccessTokenSilently(tokenConfig);
       return fetch(wishUrl, {
         method,
@@ -74,7 +80,9 @@ export const useCreateWishList = () => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }).then((res) => res.json()).catch((err) => console.log(err))
+      })
+        .then((res) => res.json())
+        .catch((err) => console.log(err));
     },
     {
       onSuccess: () => cache.invalidateQueries("wishes"),
