@@ -23,7 +23,7 @@ const WishList = styled.ul`
   flex-wrap: wrap;
   padding: 0px;
   /* width: 400px; */
-  list-style-type:none;
+  list-style-type: none;
 `;
 
 const WishListCard = styled(Card)`
@@ -51,16 +51,14 @@ const Page = () => {
   if (isLoading) return <div>loading</div>;
   if (isError || !data) return <div>There was an error..</div>;
 
-  const onSubmit = ({ newData }) => updateWishList({ method: 'POST', item: newData });
+  const onSubmit = (data) => updateWishList({ method: "POST", item: data });
+
   return (
     <>
       <WishList>
         {data?.Items?.map(({ id, ...item }) => (
           <li key={id}>
             <WishListCard raised={true}>
-              <p>{item.name}</p>
-              {/* <p>{item.description}</p>
-              <p>{item.url}</p> */}
               {Object.entries(item).map(([key, val]) => {
                 return (
                   <Controller
@@ -75,8 +73,10 @@ const Page = () => {
               })}
               <Button
                 style={{ marginTop: 24 }}
-                onClick={() => updateWishList({ method: 'PATCH', item: { id, ...item }})}
-                variant="contained"
+                onClick={handleSubmit((data) =>
+                  updateWishList({ method: "PATCH", item: { ...data[id], id } })
+                )}
+                variant="outlined"
                 color="primary"
               >
                 Update
@@ -94,14 +94,14 @@ const Page = () => {
         ))}
       </WishList>
       <TestPaper>
-        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <StyledForm>
           {Object.keys(wishListItem).map((i) => (
             <Controller
               key={i}
               label={i}
               defaultValue=""
               control={control}
-              name={`newData.${i}`}
+              name={i}
               as={<TextField />}
             />
           ))}
@@ -110,6 +110,7 @@ const Page = () => {
             color="primary"
             variant="contained"
             type="submit"
+            onClick={handleSubmit(onSubmit)}
           >
             Add
           </Button>
