@@ -4,7 +4,7 @@ import {
   useWishList,
   useCreateWishList,
   useDeleteWishList,
-} from "../../hooks/useApi";
+} from "../../hooks/useWishList";
 import { Controller, useForm } from "react-hook-form";
 
 const TestPaper = styled(Paper)`
