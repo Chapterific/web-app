@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../Login";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { Nav } from "./Nav";
 
 const GlobalStyle = createGlobalStyle`
@@ -12,25 +12,40 @@ const GlobalStyle = createGlobalStyle`
   `}
 `;
 
+const Header = styled.div`
+  ${({ theme }) => `
+    display: flex;
+    flex-direction: column;
+    .top {
+      display: flex;
+      flex-direction: row;
+      .right {
+        right: 0px;
+        width: 100%;
+        text-align: right;
+      }
+    }
+  `}
+`;
+
 export const Layout = ({ children, pageTitle, subTitle }) => {
   const { isAuthenticated } = useAuth0();
   return (
-    <>
+    <Header>
       <GlobalStyle />
-      <span
-        style={{
-          height: "100%",
-          verticalAlign: "text-bottom",
-        }}
-      >
-        <Typography color="primary" variant="h3" component="h1">
-          {pageTitle}
-        </Typography>
-        <Typography color="textPrimary">{subTitle}</Typography>
-        {isAuthenticated ? <LogoutButton></LogoutButton> : null}
-        <Nav />
-      </span>
+      <div className="top">
+        <div>
+          <Typography color="primary" variant="h3" component="h1">
+            {pageTitle}
+          </Typography>
+          <Typography color="textPrimary">{subTitle}</Typography>
+        </div>
+        <div className="right">
+          {isAuthenticated ? <LogoutButton></LogoutButton> : null}
+          <Nav />
+        </div>
+      </div>
       {children}
-    </>
+    </Header>
   );
 };

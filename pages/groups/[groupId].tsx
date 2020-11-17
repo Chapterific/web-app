@@ -21,7 +21,7 @@ const Group = () => {
   if (isLoading) return <div>loading... </div>;
   if (isError || !data) return <div>something went wrong..</div>;
   return (
-    <>
+    <div>
       <Link href="/">
         <IconButton>
           <ArrowBackIcon />
@@ -32,7 +32,7 @@ const Group = () => {
           {data?.[0]?.name}
         </Typography>
       </GroupPaper>
-    </>
+    </div>
   );
 };
 
