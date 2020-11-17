@@ -2,6 +2,7 @@ import { useUsers } from "../../hooks/useUsers";
 import { Typography, Paper, Button } from "@material-ui/core";
 import styled from "styled-components";
 import Link from "next/link";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserPaper = styled(Paper)`
   ${({ theme }) => `
@@ -12,7 +13,8 @@ const UserPaper = styled(Paper)`
 // (Sean Rivard-Morton) [2020-11-16] TODO
 // turn this into a form
 const UserSettings = () => {
-  const { isLoading, isError, data } = useUsers("sean.rivard.morton@gmail.com");
+  const { user } = useAuth0();
+  const { isLoading, isError, data } = useUsers(user.email);
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>error</div>;
   if (!data) return <div>oops</div>;
