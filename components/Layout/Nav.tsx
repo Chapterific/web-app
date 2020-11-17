@@ -1,6 +1,6 @@
 import { IconButton } from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/settings";
-import HomeIcon from "@material-ui/icons/home";
+import { Settings, Home } from "@material-ui/icons";
+// import HomeIcon from "@material-ui/icons/home";
 import Link from "next/link";
 
 export const Nav = () => {
@@ -8,12 +8,12 @@ export const Nav = () => {
     <>
       <Link href="/user-settings">
         <IconButton>
-          <SettingsIcon />
+          <Settings />
         </IconButton>
       </Link>
       <Link href="/">
         <IconButton>
-          <HomeIcon />
+          <Home />
         </IconButton>
       </Link>
     </>
