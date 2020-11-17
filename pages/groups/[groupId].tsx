@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useGroup } from "../../hooks/useGroup";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Link from "next/link";
+import { AddUserForm } from "./components/AddUserForm";
 
 const GroupPaper = styled(Paper)`
   ${({ theme }) => `
@@ -25,7 +26,6 @@ const Group = () => {
 
   if (isLoading) return <div>loading... </div>;
   if (isError || !data) return <div>something went wrong..</div>;
-  console.log(data.books);
   return (
     <div>
       <GroupPaper>
@@ -33,6 +33,7 @@ const Group = () => {
           {data.name}
         </Typography>
       </GroupPaper>
+      <AddUserForm groupId={groupId}></AddUserForm>
       <ul>
         {data.books.map((book) => (
           <li key={book.id}>

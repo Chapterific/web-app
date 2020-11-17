@@ -28,3 +28,14 @@ export const useBookInGroup = (groupId) => {
     });
   });
 };
+
+export const useAddUserToGroup = (groupId) => {
+  const api = useApi();
+
+  return useMutation(async (userId: string) => {
+    return api(`/groups/${groupId}/users`, {
+      method: "POST",
+      body: JSON.stringify(userId),
+    });
+  });
+};
