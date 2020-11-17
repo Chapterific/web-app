@@ -13,8 +13,7 @@ const UserPaper = styled(Paper)`
 // (Sean Rivard-Morton) [2020-11-16] TODO
 // turn this into a form
 const UserSettings = () => {
-  const { user } = useAuth0();
-  const { isLoading, isError, data } = useUsers(user.email);
+  const { isLoading, isError, data } = useUsers();
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>error</div>;
   if (!data) return <div>oops</div>;

@@ -23,7 +23,7 @@ const Book = () => {
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>oops</div>;
   return (
-    <>
+    <div>
       <Link href="/">
         <IconButton>
           <ArrowBackIcon />
@@ -53,7 +53,7 @@ const Book = () => {
           Add To Read List
         </Button>
       </BookPaper>
-    </>
+    </div>
   );
 };
 

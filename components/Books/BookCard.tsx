@@ -9,6 +9,7 @@ import { Rating } from "@material-ui/lab";
 import { Book } from "./book";
 import styled from "styled-components";
 import Link from "next/link";
+import { useBookInGroup } from "../../hooks/useGroup";
 
 const StyledCard = styled(Card)`
   ${({ theme }) => `
@@ -32,7 +33,14 @@ const CardControls = styled.div`
     `}
 `;
 
-export const BookCard = ({ book }: { book: Book }) => {
+export const BookCard = ({
+  book,
+  groupToAddTo,
+}: {
+  book: Book;
+  groupToAddTo: string;
+}) => {
+  const [addBook] = useBookInGroup(groupToAddTo);
   return (
     <StyledCard>
       <CardMedia
@@ -50,7 +58,11 @@ export const BookCard = ({ book }: { book: Book }) => {
           readOnly
         />
         <CardControls>
-          <Button color="primary" variant="contained">
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => addBook({ book })}
+          >
             Add to Read List
           </Button>
           <Link href={`/books/${book.id}`}>

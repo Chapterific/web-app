@@ -1,4 +1,4 @@
-import { Paper, Typography, IconButton } from "@material-ui/core";
+import { Paper, Typography, IconButton, Card, Button } from "@material-ui/core";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useGroup } from "../../hooks/useGroup";
@@ -11,27 +11,42 @@ const GroupPaper = styled(Paper)`
   `}
 `;
 
+const BookCard = styled(Card)`
+  ${({ theme }) => `
+    padding: ${theme.spacing(2)}px;
+    margin: ${theme.spacing(2)}px;
+  `}
+`;
+
 const Group = () => {
   const router = useRouter();
   const { groupId } = router.query;
-  // const getGroups = useGroup();
-  // const { data, isLoading, isError } = getGroups(groupId);
   const { data, isLoading, isError } = useGroup(groupId);
 
   if (isLoading) return <div>loading... </div>;
   if (isError || !data) return <div>something went wrong..</div>;
+  console.log(data.books);
   return (
     <div>
-      <Link href="/">
-        <IconButton>
-          <ArrowBackIcon />
-        </IconButton>
-      </Link>
       <GroupPaper>
         <Typography variant="h4" component="h1">
-          {data?.[0]?.name}
+          {data.name}
         </Typography>
       </GroupPaper>
+      <ul>
+        {data.books.map((book) => (
+          <li key={book.id}>
+            <BookCard>
+              <Typography variant="h5">{book.volumeInfo.title}</Typography>
+              <Link href={`/books/${book.id}`}>
+                <Button variant="outlined" color="primary">
+                  See More
+                </Button>
+              </Link>
+            </BookCard>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

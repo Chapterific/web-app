@@ -13,7 +13,7 @@ const BooksList = styled.ul`
   `}
 `;
 
-export const BookList = (bookQuery) => {
+export const BookList = ({ bookQuery, groupToAddTo }) => {
   const { data, isLoading, isError } = useBooks(bookQuery);
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>No Books</div>;
@@ -23,7 +23,7 @@ export const BookList = (bookQuery) => {
       {data?.items?.map((book) => {
         return (
           <li key={book.id}>
-            <BookCard book={book}></BookCard>
+            <BookCard book={book} groupToAddTo={groupToAddTo}></BookCard>
           </li>
         );
       })}

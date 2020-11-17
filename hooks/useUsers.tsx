@@ -7,12 +7,13 @@ const config = {
 };
 const baseUrl = "https://79bidrpbo9.execute-api.eu-west-2.amazonaws.com/prod";
 
-export const useUsers = (id) => {
+export const useUsers = () => {
+  const { user } = useAuth0();
   const api = useApi();
 
   return useQuery<any>({
     config,
     queryKey: "users",
-    queryFn: async () => api(`/users/${id}`),
+    queryFn: async () => api(`/users/${user.email}`),
   });
 };

@@ -24,7 +24,7 @@ interface Books {
   totalItems: number;
 }
 
-export function useBooks({ bookQuery }) {
+export function useBooks(bookQuery) {
   return useQuery<Books>(
     ["books", bookQuery],
     () =>
