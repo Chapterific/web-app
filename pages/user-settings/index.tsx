@@ -1,25 +1,50 @@
 import { useUsers } from "../../hooks/useUsers";
+import { Typography, Paper, Button } from "@material-ui/core";
+import styled from "styled-components";
+import Link from "next/link";
 
+const UserPaper = styled(Paper)`
+  ${({ theme }) => `
+      padding: ${theme.spacing(1)}px;
+    `}
+`;
+
+// (Sean Rivard-Morton) [2020-11-16] TODO
+// turn this into a form
 const UserSettings = () => {
-  const getData = useUsers();
-  const { isLoading, isError, data } = getData("01");
+  const { isLoading, isError, data } = useUsers("sean.rivard.morton@gmail.com");
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>error</div>;
   if (!data) return <div>oops</div>;
-  const [user] = data;
   return (
-    <>
-      <div>boop</div>
-      <li>
-        {Object.entries(user).map(([key, val]) => {
+    <UserPaper>
+      <Typography component="h3">User Settings</Typography>
+      <ul>
+        {Object.entries(data).map(([key, val]: [any, any]) => {
+          if (key === "groups") {
+            return val.map((group) => {
+              const [_, id] = group.pk.split("#");
+              return (
+                <Link key={id} href={`/groups/${id}`}>
+                  <Button
+                    style={{ margin: 8 }}
+                    variant="contained"
+                    color="primary"
+                  >
+                    {group.name}
+                  </Button>
+                </Link>
+              );
+            });
+          }
           return (
-            <ul key={val}>
+            <li key={key}>
               {key}: {val}
-            </ul>
+            </li>
           );
         })}
-      </li>
-    </>
+      </ul>
+    </UserPaper>
   );
 };
 

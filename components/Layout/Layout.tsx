@@ -2,6 +2,7 @@ import { Typography } from "@material-ui/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../Login";
 import { createGlobalStyle } from "styled-components";
+import { Nav } from "./Nav";
 
 const GlobalStyle = createGlobalStyle`
   ${({ theme }) => `
@@ -27,6 +28,7 @@ export const Layout = ({ children, pageTitle, subTitle }) => {
         </Typography>
         <Typography color="textPrimary">{subTitle}</Typography>
         {isAuthenticated ? <LogoutButton></LogoutButton> : null}
+        <Nav />
       </span>
       {children}
     </>
