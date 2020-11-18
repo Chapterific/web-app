@@ -6,8 +6,6 @@ const config = {
   refetchOnWindowFocus: false,
 };
 
-const baseUrl = "https://79bidrpbo9.execute-api.eu-west-2.amazonaws.com/prod";
-
 export const useGroup = (id) => {
   const api = useApi();
 

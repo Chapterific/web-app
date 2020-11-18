@@ -5,6 +5,7 @@ import { useGroup } from "../../hooks/useGroup";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Link from "next/link";
 import { AddUserForm } from "./components/AddUserForm";
+import { UsersInGroupList } from "./components/UsersInGroupList";
 
 const GroupPaper = styled(Paper)`
   ${({ theme }) => `
@@ -33,9 +34,10 @@ const Group = () => {
           {data.name}
         </Typography>
       </GroupPaper>
+      <UsersInGroupList groupData={data}></UsersInGroupList>
       <AddUserForm groupId={groupId}></AddUserForm>
       <ul>
-        {data.books.map((book) => (
+        {data?.books?.map((book) => (
           <li key={book.id}>
             <BookCard>
               <Typography variant="h5">{book.volumeInfo.title}</Typography>

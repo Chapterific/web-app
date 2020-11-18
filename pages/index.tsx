@@ -36,7 +36,7 @@ export default function Books() {
     <MainContainer maxWidth="md">
       <HomePaper>
         <Typography variant="subtitle1" component="h3">
-          Active Group: {group.name}
+          Active Group: {group?.name}
         </Typography>
       </HomePaper>
       <Typography color="textPrimary">Find Books</Typography>
@@ -52,7 +52,7 @@ export default function Books() {
       />
 
       <BookList
-        groupToAddTo={group.pk.replace("g#", "")}
+        groupToAddTo={group?.pk.replace("g#", "")}
         bookQuery={bookQuery}
       ></BookList>
     </MainContainer>
