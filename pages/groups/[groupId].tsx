@@ -2,9 +2,9 @@ import { Paper, Typography, Grid, Button } from "@material-ui/core";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useGroup } from "../../hooks/useGroup";
-import { AddUserForm } from "./components/AddUserForm";
-import { UsersInGroupList } from "./components/UsersInGroupList";
-import { ActiveBook } from "./components/ActiveBook";
+import { AddUserForm } from "../../components/Groups/AddUserForm";
+import { UsersInGroupList } from "../../components/Groups/UsersInGroupList";
+import { ActiveBook } from "../../components/Groups/ActiveBook";
 
 const GroupPaper = styled(Paper)`
   ${({ theme }) => `

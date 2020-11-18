@@ -13,7 +13,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import React from "react";
-import { useSetReadTimes } from "../../../hooks/useGroup";
+import { useSetReadTimes } from "../../hooks/useGroup";
 import { differenceInDays } from "date-fns";
 
 const ActiveBookCard = styled(Card)`

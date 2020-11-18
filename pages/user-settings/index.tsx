@@ -29,7 +29,7 @@ const FormRow = styled.div`
 
 // (Sean Rivard-Morton) [2020-11-16] TODO
 // turn this into a form
-export const UserSettings = () => {
+const UserSettings = () => {
   const { isLoading, isError, data } = useUsers();
   const { user } = useAuth0();
   const [newGroup] = useCreateGroup(user.email);
@@ -94,3 +94,5 @@ export const UserSettings = () => {
     </>
   );
 };
+
+export default UserSettings;

@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
-import { useAddUserToGroup } from "../../../hooks/useGroup";
+import { useAddUserToGroup } from "../../hooks/useGroup";
 import AddButton from "@material-ui/icons/Add";
 
 const UserFormPaper = styled(Paper)`
