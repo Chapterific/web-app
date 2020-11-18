@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { useApi } from "./useApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -14,6 +14,15 @@ export const useUsers = () => {
   return useQuery<any>({
     config,
     queryKey: "users",
-    queryFn: async () => api(`/users/${user.email}`),
+
+    queryFn: async () => api(`/users/${user?.email}`),
   });
+};
+
+export const useNewUser = () => {
+  const api = useApi();
+
+  return useMutation(async (email) =>
+    api("`/users", { method: "POST", body: JSON.stringify({ id: email }) })
+  );
 };

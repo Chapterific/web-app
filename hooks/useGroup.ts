@@ -37,3 +37,13 @@ export const useAddUserToGroup = (groupId) => {
     });
   });
 };
+
+export const useCreateGroup = (userId: string) => {
+  const api = useApi();
+  return useMutation(async (groupName: string) => {
+    return api(`/groups`, {
+      method: "POST",
+      body: JSON.stringify({ name: groupName, ownerId: userId }),
+    });
+  });
+};

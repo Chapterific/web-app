@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../Login";
 import styled, { createGlobalStyle } from "styled-components";
 import { Nav } from "./Nav";
+import Link from "next/link";
 
 const GlobalStyle = createGlobalStyle`
   ${({ theme }) => `
@@ -35,9 +36,16 @@ export const Layout = ({ children, pageTitle, subTitle }) => {
       <GlobalStyle />
       <div className="top">
         <div>
-          <Typography color="primary" variant="h3" component="h1">
-            {pageTitle}
-          </Typography>
+          <Link passHref href="/">
+            {/** (Sean Rivard-Morton) [2020-11-17]
+             * Apparently <Link/> from next isn't an <a> tag,so I need to use one.
+             */}
+            <a>
+              <Typography color="primary" variant="h3" component="h1">
+                {pageTitle}
+              </Typography>
+            </a>
+          </Link>
           <Typography color="textPrimary">{subTitle}</Typography>
         </div>
         <div className="right">

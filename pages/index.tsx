@@ -34,11 +34,6 @@ export default function Books() {
   // Adjust page so it renders nicely on mobile
   return (
     <MainContainer maxWidth="md">
-      <HomePaper>
-        <Typography variant="subtitle1" component="h3">
-          Active Group: {group?.name}
-        </Typography>
-      </HomePaper>
       <Typography color="textPrimary">Find Books</Typography>
       {
         // (Sean Rivard-Morton) [2020-10-09] TODO:

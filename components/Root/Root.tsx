@@ -23,11 +23,11 @@ export const Root = ({ Component, pageProps }) => {
         <ReactQueryCacheProvider queryCache={queryCache}>
           <AppStateProvider>
             <Container>
-              <Layout pageTitle="Chapterific" subTitle="It's terrific.">
-                <Login>
+              <Login>
+                <Layout pageTitle="Chapterific" subTitle="It's terrific.">
                   <Component {...pageProps} />
-                </Login>
-              </Layout>
+                </Layout>
+              </Login>
             </Container>
           </AppStateProvider>
           {process.env.NODE_ENV ? (
