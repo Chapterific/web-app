@@ -19,7 +19,6 @@ export const Profile = () => {
           audience: `https://${domain}/api/v2/`,
           scope: "read:current_user",
         });
-        console.log(accessToken);
         setToken(accessToken);
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
 

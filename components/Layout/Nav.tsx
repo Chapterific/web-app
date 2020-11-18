@@ -17,30 +17,32 @@ export const Nav = () => {
           <Settings />
         </IconButton>
       </Link>
-      <Controller
-        control={control}
-        name="activeGroup"
-        defaultValue={appContext.activeGroup || data?.groups[0].name}
-        label="active group"
-        render={({ onChange, value }) => {
-          return (
-            <Select
-              value={value}
-              style={{ width: 200 }}
-              onChange={({ target }) => {
-                onChange(target.value);
-                setActiveGroup({ activeGroup: target.value });
-              }}
-            >
-              {data?.groups?.map((group) => (
-                <MenuItem key={group.pk} value={group.name}>
-                  {group.name}
-                </MenuItem>
-              ))}
-            </Select>
-          );
-        }}
-      />
+      {data?.groups.length > 0 && (
+        <Controller
+          control={control}
+          name="activeGroup"
+          defaultValue={appContext.activeGroup || data?.groups[0].name}
+          label="active group"
+          render={({ onChange, value }) => {
+            return (
+              <Select
+                value={value}
+                style={{ width: 200 }}
+                onChange={({ target }) => {
+                  onChange(target.value);
+                  setActiveGroup({ activeGroup: target.value });
+                }}
+              >
+                {data?.groups?.map((group) => (
+                  <MenuItem key={group.pk} value={group.name}>
+                    {group.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            );
+          }}
+        />
+      )}
     </>
   );
 };

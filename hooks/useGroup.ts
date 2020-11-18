@@ -30,10 +30,10 @@ export const useBookInGroup = (groupId) => {
 export const useAddUserToGroup = (groupId) => {
   const api = useApi();
 
-  return useMutation(async (userId: string) => {
+  return useMutation(async (data: { userId: string; name: string }) => {
     return api(`/groups/${groupId}/users`, {
       method: "POST",
-      body: JSON.stringify(userId),
+      body: JSON.stringify(data),
     });
   });
 };
@@ -44,6 +44,16 @@ export const useCreateGroup = (userId: string) => {
     return api(`/groups`, {
       method: "POST",
       body: JSON.stringify({ name: groupName, ownerId: userId }),
+    });
+  });
+};
+
+export const useSetReadTimes = (groupId, bookId) => {
+  const api = useApi();
+  return useMutation(async (times: { startDate?: any; endDate?: any }) => {
+    return api(`/groups/${groupId}/books/${bookId}`, {
+      method: "PATCH",
+      body: JSON.stringify(times),
     });
   });
 };

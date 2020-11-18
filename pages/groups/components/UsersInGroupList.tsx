@@ -14,7 +14,6 @@ const UserPaper = styled(Paper)`
 
 export const UsersInGroupList = ({ groupData }: { groupData: any }) => {
   const { users } = groupData;
-
   return (
     <UserPaper>
       <Typography variant="subtitle1" component="h3">
@@ -24,7 +23,7 @@ export const UsersInGroupList = ({ groupData }: { groupData: any }) => {
         {users?.map((user) => (
           // (Sean Rivard-Morton) [2020-11-17] TODO
           // Add user details to userInGroup entity
-          <li>{user.email}</li>
+          <li key={user.email}>{user.email}</li>
         ))}
       </ul>
     </UserPaper>

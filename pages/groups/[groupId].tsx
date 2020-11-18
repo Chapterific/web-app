@@ -1,22 +1,15 @@
-import { Paper, Typography, IconButton, Card, Button } from "@material-ui/core";
+import { Paper, Typography, Grid, Button } from "@material-ui/core";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useGroup } from "../../hooks/useGroup";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import Link from "next/link";
 import { AddUserForm } from "./components/AddUserForm";
 import { UsersInGroupList } from "./components/UsersInGroupList";
+import { ActiveBook } from "./components/ActiveBook";
 
 const GroupPaper = styled(Paper)`
   ${({ theme }) => `
-    padding: ${theme.spacing(3)}px;
-  `}
-`;
-
-const BookCard = styled(Card)`
-  ${({ theme }) => `
     padding: ${theme.spacing(2)}px;
-    margin: ${theme.spacing(2)}px;
+    margin-top: ${theme.spacing(1)}px;
   `}
 `;
 
@@ -27,6 +20,7 @@ const Group = () => {
 
   if (isLoading) return <div>loading... </div>;
   if (isError || !data) return <div>something went wrong..</div>;
+
   return (
     <div>
       <GroupPaper>
@@ -34,22 +28,28 @@ const Group = () => {
           {data.name}
         </Typography>
       </GroupPaper>
-      <UsersInGroupList groupData={data}></UsersInGroupList>
-      <AddUserForm groupId={groupId}></AddUserForm>
-      <ul>
-        {data?.books?.map((book) => (
-          <li key={book.id}>
-            <BookCard>
-              <Typography variant="h5">{book.volumeInfo.title}</Typography>
-              <Link href={`/books/${book.id}`}>
-                <Button variant="outlined" color="primary">
-                  See More
-                </Button>
-              </Link>
-            </BookCard>
-          </li>
-        ))}
-      </ul>
+      <Grid container>
+        <Grid item lg={3}>
+          <AddUserForm id={groupId} group={data}></AddUserForm>
+          <UsersInGroupList groupData={data}></UsersInGroupList>
+        </Grid>
+        <Grid item lg={8}>
+          <Paper style={{ marginTop: 16, padding: 8 }}>
+            <Typography color="textPrimary" variant="h4" component="h4">
+              Active Book
+            </Typography>
+          </Paper>
+          {data?.books && <ActiveBook groupId={groupId} book={data.books[0]} />}
+          <Button style={{ marginTop: 8 }} variant="contained" color="primary">
+            Start a discussion
+          </Button>
+          {data?.books.map((book) => (
+            <Paper key={book.id} style={{ marginTop: 16, padding: 8 }}>
+              {book.volumeInfo.title}
+            </Paper>
+          ))}
+        </Grid>
+      </Grid>
     </div>
   );
 };
