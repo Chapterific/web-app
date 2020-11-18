@@ -16,7 +16,7 @@ export const AppStateProvider = ({ children }) => {
     activeGroup: string;
   }>({
     bookQuery: "",
-    activeGroup: "",
+    activeGroup: null,
   });
   const updateAppState = (payload: {
     bookQuery?: string;

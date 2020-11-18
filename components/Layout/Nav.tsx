@@ -10,7 +10,6 @@ export const Nav = () => {
   const { control, handleSubmit } = useForm();
   const [appContext, setActiveGroup] = useAppState();
   if (isLoading || isError) return <div>sup</div>;
-  console.log(appContext);
   return (
     <>
       <Link href="/user-settings">
@@ -21,16 +20,13 @@ export const Nav = () => {
       <Controller
         control={control}
         name="activeGroup"
-        defaultValue={appContext.activeGroup}
+        defaultValue={appContext.activeGroup || data?.groups[0].name}
         label="active group"
         render={({ onChange, value }) => {
           return (
             <Select
               value={value}
               style={{ width: 200 }}
-              // onChange={({ target }) =>
-              //   setActiveGroup({ activeGroup: target.value })
-              // }
               onChange={({ target }) => {
                 onChange(target.value);
                 setActiveGroup({ activeGroup: target.value });
