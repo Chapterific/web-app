@@ -11,16 +11,23 @@ export const AppStateProvider = ({ children }) => {
   // If appState does get more complicated, we will replace useImmer with
   // useImmerReducer, which functions the same as useReduce() except it
   // lets you modify a draft object.
-  const [state, setState] = useImmer<{ bookQuery: string }>({
+  const [state, setState] = useImmer<{
+    bookQuery: string;
+    activeGroup: string;
+  }>({
     bookQuery: "",
+    activeGroup: "",
   });
-  const updateQuery = (query) =>
+  const updateAppState = (payload: {
+    bookQuery?: string;
+    activeGroup?: string;
+  }) =>
     setState((draft) => {
-      draft.bookQuery = query;
+      draft = { ...draft, ...payload };
       return draft;
     });
   return (
-    <AppStateContext.Provider value={[state, updateQuery]}>
+    <AppStateContext.Provider value={[state, updateAppState]}>
       {children}
     </AppStateContext.Provider>
   );

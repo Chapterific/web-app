@@ -79,7 +79,7 @@ export const UserSettings = () => {
           </PageHeader>
 
           {data?.groups.map((group) => (
-            <PageHeader>
+            <PageHeader key={group.pk}>
               <Link passHref href={`groups/${group.pk.replace("g#", "")}`}>
                 <a>
                   <Typography variant="h5" component="h5">

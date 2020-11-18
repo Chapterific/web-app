@@ -40,7 +40,7 @@ export default function Books() {
         // Refactor this into BookSearch.tsx, and add filters
       }
       <TextField
-        onChange={setBookQuery}
+        onChange={(bookQuery) => setBookQuery({ bookQuery })}
         name="query"
         control={control}
         defaultValue={debouncedBookQuery || bookQuery}
