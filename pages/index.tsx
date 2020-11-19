@@ -7,6 +7,7 @@ import { TextField } from "../components/Form";
 import { useDebounce } from "../hooks/useDebounce";
 import { useAppState } from "../hooks/useAppContext";
 import { useUsers } from "../hooks/useUsers";
+import { useGroup } from "../hooks/useGroup";
 
 const MainContainer = styled(Container)`
   ${({ theme }) => `
@@ -22,19 +23,22 @@ const HomePaper = styled(Paper)`
 `;
 
 export default function Books() {
-  const [{ bookQuery }, setBookQuery] = useAppState();
+  const [{ bookQuery, activeGroup }, setBookQuery] = useAppState();
   const { control } = useForm();
-  const { data, isLoading, isError } = useUsers();
+  const { data: user, isLoading, isError } = useUsers();
   const debouncedBookQuery = useDebounce(bookQuery, 2000);
 
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>oopos</div>;
-  const [group] = data.groups;
+  const group = user.groups.find((group) => group.name === activeGroup);
+  console.log(user.groups);
   // (Sean Rivard-Morton) [2020-10-09] TODO:
   // Adjust page so it renders nicely on mobile
   return (
     <MainContainer maxWidth="md">
-      <Typography color="textPrimary">Find Books</Typography>
+      <Typography color="textPrimary">
+        Find Books to add to {activeGroup}
+      </Typography>
       {
         // (Sean Rivard-Morton) [2020-10-09] TODO:
         // Refactor this into BookSearch.tsx, and add filters

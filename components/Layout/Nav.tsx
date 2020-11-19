@@ -4,11 +4,13 @@ import { useUsers } from "../../hooks/useUsers";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { useAppState } from "../../hooks/useAppContext";
+import React from "react";
 
 export const Nav = () => {
   const { data, isLoading, isError }: any = useUsers();
   const { control, handleSubmit } = useForm();
   const [appContext, setActiveGroup] = useAppState();
+
   if (isLoading || isError) return <div>sup</div>;
   return (
     <>

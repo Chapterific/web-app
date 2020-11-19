@@ -20,7 +20,7 @@ const Group = () => {
 
   if (isLoading) return <div>loading... </div>;
   if (isError || !data) return <div>something went wrong..</div>;
-
+  console.log(data.books);
   return (
     <div>
       <GroupPaper>
@@ -39,7 +39,9 @@ const Group = () => {
               Active Book
             </Typography>
           </Paper>
-          {data?.books && <ActiveBook groupId={groupId} book={data.books[0]} />}
+          {data?.books[0] && (
+            <ActiveBook groupId={groupId} book={data.books[0]} />
+          )}
           <Button style={{ marginTop: 8 }} variant="contained" color="primary">
             Start a discussion
           </Button>

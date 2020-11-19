@@ -21,15 +21,15 @@ export const Root = ({ Component, pageProps }) => {
         useRefreshTokens={true}
       >
         <ReactQueryCacheProvider queryCache={queryCache}>
-          <AppStateProvider>
-            <Container>
-              <Login>
+          <Container>
+            <Login>
+              <AppStateProvider>
                 <Layout pageTitle="Chapterific" subTitle="It's terrific.">
                   <Component {...pageProps} />
                 </Layout>
-              </Login>
-            </Container>
-          </AppStateProvider>
+              </AppStateProvider>
+            </Login>
+          </Container>
           {process.env.NODE_ENV ? (
             <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
           ) : null}
